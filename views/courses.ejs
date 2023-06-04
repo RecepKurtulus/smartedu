@@ -8,7 +8,7 @@
 		</div>
 	</div>
 	
-    <div id="overviews" class="section wb">
+    <div id="overviews" class="section wb">   
         <div class="container">
             <div class="row"> 
                 <div class="col-lg-9 blog-post-single">
@@ -23,10 +23,10 @@
 										</div>
 										<div class="course-br">
 										  <div class="course-title">
-											<h2><a href="course-single.html" title=""><%= course.name %></a></h2>
+											<h2><a href='courses/<%= course.slug %> 'title=""><%= course.name %></a></h2>
 										  </div>
 										  <div class="course-desc">
-											<p><%= course.description %></p>
+											<p><%= course.description %></p> 
 										  </div>
 										</div>
 										<div class="course-meta-bot">

@@ -18,6 +18,8 @@ exports.CreateCourse = async (req, res) => {
   }
 };
 
+
+
 exports.GetAllCourses = async (req, res) => {
   try {
     const courses = await Course.find();
@@ -37,5 +39,22 @@ exports.GetAllCourses = async (req, res) => {
     console.log(err.message); 
   }
 };
+
+exports.GetSingleCourse= async(req, res)=>{
+  try {
+    const course = await Course.findOne({slug: req.params.slug})
+    res.status(200).render('course-single', {
+      course,
+      pageName: 'courses',
+    });
+
+  }
+  catch (error) {
+    res.status(400).json({
+      status: 'fail',
+      error,
+    });
+  }
+}
 
 
