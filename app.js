@@ -7,6 +7,8 @@ const mongoose = require('mongoose');
 
 const appRouter=require('./routes/pageRoute');
 const courseRouter=require('./routes/courseRoute');
+const categoryRouter=require('./routes/categoryRoute');
+//APP routerler
 
 mongoose.connect('mongodb://127.0.0.1/smartedu-db', {
 
@@ -35,6 +37,8 @@ app.use ('/',appRouter);
 //Burada böyle bir istek gedi mi appRoteri kullan diyor
 app.use ('/courses',courseRouter);
 //Burada courses için istek geldi mi course routeri kullan diyoruz
+app.use('/categories',categoryRouter);
+//Burada categories için istek geldi mi category routeri kullan diyoruz
 const port = 3000;
 app.listen(port,() => {
     console.log(`App started at ${port}`);}
