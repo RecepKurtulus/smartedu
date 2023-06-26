@@ -1,0 +1,13 @@
+const express = require('express');
+const authController = require('../controllers/authController');
+const router=express.Router();
+router.route('/signup').post(authController.CreateUser);
+//http://localhost:3000/users/signup post req geldiği zaman CreateUser çalıştırıcak
+router.route('/signin').post(authController.LoginUser);
+//http://localhost:3000/users/signin post req geldiği zaman LoginUser çalıştırıcak
+
+module.exports = router;
+//router modülünü export ettik app.js'de kullanmak için
+
+
+

@@ -28,7 +28,7 @@ exports.GetAllCourses = async (req, res) => {
     const categorySlug=req.query.categories;
     //Burda kategori querysini yakalıyoruz
     const category=await Category.findOne({slug:categorySlug});
-    //Burada istenilen kategoriyle ulaşmak için db'de üstteki sluga ait kategoriyi arıyoruz ve dikkat et await kullan
+    //Burada slugı attığımız querye ait olan slugı eşit olan categoriyi bulduk
     let filter={};
     if(categorySlug){
       filter={category:category._id}
