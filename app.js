@@ -3,8 +3,9 @@ const express = require('express');
 const nodemon = require('nodemon');
 const app = express();
 const mongoose = require('mongoose');
+const MongoStore = require('connect-mongo');
 //mongoose paketini require ettik
-
+const session=require('express-session');
 const appRouter=require('./routes/pageRoute');
 const courseRouter=require('./routes/courseRoute');
 const categoryRouter=require('./routes/categoryRoute');
@@ -25,10 +26,29 @@ mongoose.connect('mongodb://127.0.0.1/smartedu-db', {
 
 app.set('view engine','ejs');
 //Template Engine
-app.use(express.static("public"))
+global.userIN=null;
+global.loggendIN=false;
+//Global Variable
+app.use(express.static("public"));
 //Burada expressi ana sunucu şablonu yaptık
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+  secret: 'my_keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  store: MongoStore.create({ mongoUrl: 'mongodb://127.0.0.1/smartedu-db' })
+}));
+//Burada express sessionın çalışması için middleware olarak kullandık
+app.use('*',(req,res,next) => {
+  userIN=req.session.userID;
+  
+  
+  next();
+});
+//Burada başta tanımladığımız global variable "userIN" null dı ama giriş yaptıktan sonra bunu userID'ye eşitledik ve artık true döndürmeye
+//başladı artık user girişine ve çıkışına göre işlme yapabilicez
 //MİDDLEWARES
 
 
