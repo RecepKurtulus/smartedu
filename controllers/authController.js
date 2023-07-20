@@ -1,16 +1,15 @@
 const User = require('../models/User');
+const Course = require('../models/Course');
+const Category = require('../models/Category');
 const bcrypt = require('bcrypt');
 const session=require('express-session');
+
 //Course modelimizi çağırdık
 
 exports.CreateUser = async (req, res) => {
   try {
     const user = await User.create(req.body);
-    res.status(201).json({
-      status: 'success',
-      user,
-      
-    });
+    res.status(201).redirect('/login')
     console.log(`${user.name} created successfully`);
   } catch (err) {
     res.status(400).json({
@@ -19,6 +18,7 @@ exports.CreateUser = async (req, res) => {
     });
     console.log(`${err.message}`);
   }
+  
 };
 exports.LoginUser = async (req, res) => {
   try {
@@ -32,7 +32,7 @@ exports.LoginUser = async (req, res) => {
       if (same) {
         req.session.userID=user._id;
         
-        res.status(200).redirect('/');
+        res.status(200).redirect('/user/dashboard');
         // user session
       } else {
         console.log('Incorrect password');
@@ -48,5 +48,14 @@ exports.LoginUser = async (req, res) => {
 
 exports.LogoutUser=(req, res)=>{
   req.session.destroy();
+  //Session'ı yok edip alt kodda da anasayfaya gönderiyoruz
   res.redirect('/');
+}
+exports.getDashboardPage= async (req, res) =>{
+  const user=await User.findOne({_id:req.session.userID}).populate('courses');
+  //Useri gönderdik
+  const categories=await Category.find();
+
+  const courses=await Course.find({user:req.session.userID});
+  res.status(200).render('dashboard',{pageName: 'dashboard',user,categories,courses});
 }

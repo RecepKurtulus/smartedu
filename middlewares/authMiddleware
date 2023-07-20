@@ -1,0 +1,38 @@
+const User = require('../models/User');
+
+exports.dashBoardMiddleware = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.session.userID);
+        if (!user) {
+            return res.redirect('/');
+        }
+        next();
+    } catch (err) {
+        console.error(err);
+        return res.redirect('/');
+    }
+};
+exports.loginMiddleware = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.session.userID);
+        if (user) {
+            return res.redirect('/');
+        }
+        next();
+    } catch (err) {
+        console.error(err);
+        return res.redirect('/');
+    }
+};
+exports.registerMiddleware = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.session.userID);
+        if (user) {
+            return res.redirect('/');
+        }
+        next();
+    } catch (err) {
+        console.error(err);
+        return res.redirect('/');
+    }
+};

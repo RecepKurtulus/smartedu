@@ -12,3 +12,4 @@ exports.getLoginPage= (req, res) =>{
     res.status(200).render('login',{pageName: 'login',});
 }
 
+

@@ -2,6 +2,13 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const Schema= mongoose.Schema;
 const UserSchema = new Schema({
+    role:{
+        type: String,
+        enum: ['Student','Teacher','Admin'],
+        // 3 Farklı değer alabilir 
+        default: 'Student',
+        //Degfult olarak daha önce de kayıt olanlar student olarak kayıt oldu
+    },
     name:{
         type: String,
         required: true
@@ -19,6 +26,17 @@ const UserSchema = new Schema({
         
 
     },
+    bio:{
+        type: String,
+        required: true,
+        
+
+    },
+    courses:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Course'
+
+    }],
     acCreatedDate: { type: Date, default: Date.now ,
         },
     

@@ -64,6 +64,8 @@ app.use('/register',appRouter)
 //Burada register için istek geldi mi appRoterikullan diyoruz
 app.use('/login',appRouter)
 //Burada login için istek geldi mi appRoterikullan diyoruz
+app.use('/dashboard',userRouter);
+
 app.use('/user',userRouter)
 //Burada user için istek geldi mi user routeri kullan diyoruz
 const port = 3000;

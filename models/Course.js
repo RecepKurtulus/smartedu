@@ -23,10 +23,10 @@ const CourseSchema = new Schema({
         trim:true
 
     },
-    teacherName:{
+
+    videoLink:{
         type: String,
         required: true,
-        trim:true
 
     },
     createDate: { type: Date, default: Date.now ,
@@ -39,9 +39,12 @@ const CourseSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref:'Category',
         //Kursları oluştururken katagori modelini görmemizi sağlıcak
-    }
+    },
     //Kursları oluştururken katagorisini de seçicez bunun sayeysinde
-    
+    user:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'User',
+    }
 });
 //Kurs şablonunu oluşturduk artık tüm kurslar bu şablon üzerinden gidicek
 
