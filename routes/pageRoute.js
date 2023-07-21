@@ -10,7 +10,10 @@ router.route('/register').get(authMiddleware.registerMiddleware,pageController.g
 //Eğer sana register isteği geldiyse pagecontroller'a git getregisterpage'i çalıştır
 router.route('/login').get(authMiddleware.loginMiddleware,pageController.getLoginPage);
 //Eğer sana login isteği geldiyse pagecontroller'a git getloginpage'i çalıştır
-
+router.route('/contact').get(pageController.getContactPage);
+//Eğer sana contact isteği geldiyse pagecontroller'a git getContactPage'i çalıştır
+router.route('/contact').post(pageController.sendEmail);
+//Eğer sana contact isteği geldiyse pagecontroller'a git sendEmail'i çalıştır
 
 
 module.exports = router;

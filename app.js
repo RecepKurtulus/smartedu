@@ -68,6 +68,8 @@ app.use('/dashboard',userRouter);
 
 app.use('/user',userRouter)
 //Burada user için istek geldi mi user routeri kullan diyoruz
+app.use('/contact',appRouter)
+//Burada contact için istek geldi mi app routeri kullan diyoruz
 const port = 3000;
 app.listen(port,() => {
     console.log(`App started at ${port}`);}
