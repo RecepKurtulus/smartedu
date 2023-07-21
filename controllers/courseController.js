@@ -15,14 +15,13 @@ exports.CreateCourse = async (req, res) => {
       videoLink: req.body.videoLink,
       user: req.session.userID,
     })
+    req.flash('success',"You created a new course");
     res.status(201).redirect('/courses')
     console.log(`${course.name} created successfully`)
-  } catch (err) {
-    res.status(400).json({
-      status: 'fail',
-      error: err.message,
-    })
-    console.log(`${err.message}`)
+    
+  } catch (error) {
+    req.flash(error, `Something happened!`);
+    
   }
 }
 

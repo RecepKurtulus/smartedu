@@ -9,14 +9,12 @@ const session=require('express-session');
 exports.CreateUser = async (req, res) => {
   try {
     const user = await User.create(req.body);
+    req.flash('success',"You registered successfully");
     res.status(201).redirect('/login')
     console.log(`${user.name} created successfully`);
-  } catch (err) {
-    res.status(400).json({
-      status: 'fail',
-      error:err.message,
-    });
-    console.log(`${err.message}`);
+  } catch (error) {
+    req.flash('error', `Something happened!`);
+    main().catch(console.error);
   }
   
 };

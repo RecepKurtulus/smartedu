@@ -4,6 +4,7 @@ const nodemon = require('nodemon');
 const app = express();
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo');
+const flash = require('connect-flash');
 //mongoose paketini require ettik
 const session=require('express-session');
 const appRouter=require('./routes/pageRoute');
@@ -41,6 +42,11 @@ app.use(session({
   store: MongoStore.create({ mongoUrl: 'mongodb://127.0.0.1/smartedu-db' })
 }));
 //Burada express sessionın çalışması için middleware olarak kullandık
+app.use(flash());
+app.use((req, res, next) => {
+  res.locals.flashMessages=req.flash();
+  next();
+})
 app.use('*',(req,res,next) => {
   userIN=req.session.userID;
   
