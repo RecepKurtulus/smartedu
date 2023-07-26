@@ -7,14 +7,36 @@ const session=require('express-session');
 //Course modelimizi çağırdık
 
 exports.CreateUser = async (req, res) => {
+  isRegistered = false;
+  const user =await User.find();
   try {
-    const user = await User.create(req.body);
-    req.flash('success',"You registered successfully");
-    res.status(201).redirect('/login')
-    console.log(`${user.name} created successfully`);
-  } catch (error) {
-    req.flash('error', `Something happened!`);
-    main().catch(console.error);
+    
+    for(let i=0;i<user.length;i++) {
+      if(req.body.email==user[i].email){
+        isRegistered=true;
+        
+      }
+    }
+    
+    if(isRegistered) {
+      req.flash('error',"This email is already registered");
+      res.status(400).redirect('/register');
+      
+    }
+    else{
+      const user = await User.create(req.body);
+      req.flash('success',"You registered successfully");
+      res.status(201).redirect('/login')
+      console.log(`${user.name} created successfully`);
+    }
+    
+  } 
+  
+  
+  catch (error) {
+    req.flash('error', "error");
+    console.log(error);
+    res.redirect('/register');
   }
   
 };
