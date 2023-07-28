@@ -3,9 +3,11 @@ const express = require('express');
 const nodemon = require('nodemon');
 const app = express();
 const mongoose = require('mongoose');
+//mongoose paketini require ettik
 const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
-//mongoose paketini require ettik
+const methodOverride=require('method-override');
+
 const session=require('express-session');
 const appRouter=require('./routes/pageRoute');
 const courseRouter=require('./routes/courseRoute');
@@ -47,6 +49,12 @@ app.use((req, res, next) => {
   res.locals.flashMessages=req.flash();
   next();
 })
+app.use(
+  methodOverride('_method', {
+    methods: ['POST', 'GET'],
+  })
+);
+//Method override middleware
 app.use('*',(req,res,next) => {
   userIN=req.session.userID;
   

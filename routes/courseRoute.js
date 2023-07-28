@@ -11,6 +11,8 @@ router.route('/:slug').get(courseController.GetSingleCourse);
 
 router.route('/enrollCourse').post(courseController.EnrollCourse);
 router.route('/releaseCourse').post(courseController.ReleaseCourse);
+router.route('/:slug').delete(courseController.DeleteCourse);
+router.route('/:slug').put(courseController.UpdateCourse);
 module.exports = router;
 //router modülünü export ettik app.js'de kullanmak için
 

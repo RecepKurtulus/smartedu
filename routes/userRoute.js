@@ -12,6 +12,8 @@ router.route('/signout').get(authController.LogoutUser);
 router.route('/dashboard').get(authMiddleware.dashBoardMiddleware,authController.getDashboardPage);
 //Eğer sana dashboard isteği geldiyse pagecontroller'a git getdashboardpage'i çalıştır
 
+router.route('/:id').delete(authController.DeleteUser);
+
 module.exports = router;
 //router modülünü export ettik app.js'de kullanmak için
 

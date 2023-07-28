@@ -20,7 +20,7 @@ exports.CreateCourse = async (req, res) => {
     console.log(`${course.name} created successfully`)
     
   } catch (error) {
-    req.flash(error, `Something happened!`);
+    req.flash("error", `Something happened!`);
     
   }
 }
@@ -228,3 +228,45 @@ exports.ReleaseCourse = async (req, res) => {
     console.log(error)
   }
 }
+
+exports.DeleteCourse = async (req, res) => {
+  try {    
+
+    const course = await Course.findOneAndRemove({slug:req.params.slug})
+    //ejs dosyasından gelen slug parametresini yakalayıp silmeye yarıyor
+
+    req.flash("error", `${course.name} has been removed successfully`);
+
+    res.status(200).redirect('../user/dashboard');
+
+  } catch (error) {
+    res.status(400).json({
+      status: 'fail',
+      error,
+    });
+    console.log(error);
+  }
+};
+exports.UpdateCourse = async (req, res) => {
+  try {    
+
+    const course = await Course.findOne({slug:req.params.slug})
+    //ejs dosyasından gelen slug parametresini yakalamaya yarıyor
+    course.name = req.body.name;
+    course.description = req.body.description;
+    course.videoLink = req.body.videoLink;
+    course.category = req.body.category;
+    course.save();
+    req.flash("success", `${course.name} has been updated successfully`);
+
+    res.status(200).redirect('../user/dashboard');
+
+  } catch (error) {
+    res.status(400).json({
+      status: 'fail',
+      error,
+    });
+    console.log(error);
+  }
+};
+
