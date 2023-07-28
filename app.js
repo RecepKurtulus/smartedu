@@ -41,7 +41,7 @@ app.use(session({
   secret: 'my_keyboard cat',
   resave: false,
   saveUninitialized: true,
-  store: MongoStore.create({ mongoUrl: 'mongodb://127.0.0.1/smartedu-db' })
+  store: MongoStore.create({ mongoUrl: 'mongodb+srv://recepbozkurtkrtls:OKO04n7MPTDs2vOt@cluster0.iee1lkk.mongodb.net/?retryWrites=true&w=majority' })
 }));
 //Burada express sessionın çalışması için middleware olarak kullandık
 app.use(flash());
