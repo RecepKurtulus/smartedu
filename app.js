@@ -15,7 +15,7 @@ const categoryRouter=require('./routes/categoryRoute');
 const userRouter=require('./routes/userRoute');
 //APP routerler
 
-mongoose.connect('mongodb://127.0.0.1/smartedu-db', {
+mongoose.connect('mongodb+srv://recepbozkurtkrtls:OKO04n7MPTDs2vOt@cluster0.iee1lkk.mongodb.net/?retryWrites=true&w=majority', {
 
 }).then(() => {
   console.log('Connected to MongoDB');
@@ -84,7 +84,7 @@ app.use('/user',userRouter)
 //Burada user için istek geldi mi user routeri kullan diyoruz
 app.use('/contact',appRouter)
 //Burada contact için istek geldi mi app routeri kullan diyoruz
-const port = 3000;
+const port = process.env.PORT ||5000;
 app.listen(port,() => {
     console.log(`App started at ${port}`);}
     );

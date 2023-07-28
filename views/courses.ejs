@@ -25,54 +25,7 @@
 					  <% } %>
 				            <div class="row"> 
 								
-								<% if (userIN && user.role!=="Teacher") { %>
-								<!--Listelemek İçin Kullanıcağım Template-->
-								<% for (var i = 0; i < courses.length; i++) { %>
-									<div class="col-lg-6 col-md-6 col-12">
-									  <div class="course-item mb-5">
-										<div class="image-blog">
-										  <img src="https://img.youtube.com/vi/<%= courses[i].videoLink %>/maxresdefault.jpg" style="height: 200px; width: 600px;" alt="" class="img-fluid">
-										</div>
-										<div class="course-br">
-										  <div class="course-title">
-											<h1>Course Id:<%= courses[i]._id %></h1>
-											<h2><a href='courses/<%= courses[i].slug %>' title=""><%= courses[i].name %></a></h2>
-										  </div>
-										  <div class="course-desc">
-										  </div>
-								  
-										  <% let isEnrolled = false; %>
-										  <% for (var j = 0; j < user.courses.length; j++) { %>
-											<% if (user.courses[j]._id.toString() == courses[i]._id.toString()) { %>
-											  <% isEnrolled = true; %>
-											  <form method="POST" action="/courses/releaseCourse">
-												<input type="hidden" name="course_id" value="<%= user.courses[j]._id %>">
-												<button class="btn btn-danger" role="button"><span>Release</span></button>
-											  </form>
-											  <h3>
-											<% break; %>
-											<% } %>
-										  <% } %>
-								  
-										  <% if (isEnrolled==false) { %>
-											<form method="POST" action="/courses/enrollCourse">
-											  <input type="hidden" name="course_id" value="<%= courses[i]._id %>">
-											  <button class="button-18" role="button"><span>Enroll</span></button>
-											
-											</form>
-										  <% } %>
-								  
-										</div>
-										<div class="course-meta-bot">
-										  <ul>
-											<li><i class="fa fa-user" aria-hidden="true"></i> <%= courses[i].user.name %></li>
-										  </ul>
-										</div>
-									  </div>
-									</div><!-- end col -->
-								  <% } %>
-								  <% }else{ %>
-									
+									<% if (userIN && user.role!=="Teacher") { %>
 										<!--Listelemek İçin Kullanıcağım Template-->
 										<% for (var i = 0; i < courses.length; i++) { %>
 											<div class="col-lg-6 col-md-6 col-12">
@@ -82,13 +35,32 @@
 												</div>
 												<div class="course-br">
 												  <div class="course-title">
-													
+													<h1>Course Id:<%= courses[i]._id %></h1>
 													<h2><a href='courses/<%= courses[i].slug %>' title=""><%= courses[i].name %></a></h2>
 												  </div>
 												  <div class="course-desc">
 												  </div>
 										  
-												 
+												  <% let isEnrolled = false; %>
+												  <% for (var j = 0; j < user.courses.length; j++) { %>
+													<% if (user.courses[j]._id.toString() == courses[i]._id.toString()) { %>
+													  <% isEnrolled = true; %>
+													  <form method="POST" action="/courses/releaseCourse">
+														<input type="hidden" name="course_id" value="<%= user.courses[j]._id %>">
+														<button class="btn btn-danger" role="button"><span>Release</span></button>
+													  </form>
+													  <h3>
+													<% break; %>
+													<% } %>
+												  <% } %>
+										  
+												  <% if (isEnrolled==false) { %>
+													<form method="POST" action="/courses/enrollCourse">
+													  <input type="hidden" name="course_id" value="<%= courses[i]._id %>">
+													  <button class="button-18" role="button"><span>Enroll</span></button>
+													
+													</form>
+												  <% } %>
 										  
 												</div>
 												<div class="course-meta-bot">
@@ -98,9 +70,42 @@
 												</div>
 											  </div>
 											</div><!-- end col -->
-										  
-									<% } %>
-								<% } %>
+										  <% } %>
+										  <% }else{ %>
+											
+												<!--Listelemek İçin Kullanıcağım Template-->
+												<% for (var i = 0; i < courses.length; i++) { %>
+													<div class="col-lg-6 col-md-6 col-12">
+													  <div class="course-item mb-5">
+														<div class="image-blog">
+														  <img src="https://img.youtube.com/vi/<%= courses[i].videoLink %>/maxresdefault.jpg" style="height: 200px; width: 600px;" alt="" class="img-fluid">
+														</div>
+														<div class="course-br">
+														  <div class="course-title">
+															
+															<h2><a href='courses/<%= courses[i].slug %>' title=""><%= courses[i].name %></a></h2>
+														  </div>
+														  <div class="course-desc">
+														  </div>
+												  
+														 
+												  
+														</div>
+														<div class="course-meta-bot">
+														  <ul>
+															<li><i class="fa fa-user" aria-hidden="true"></i> <%= courses[i].user.name %></li>
+														  </ul>
+														</div>
+													  </div>
+													</div><!-- end col -->
+												  
+											<% } %>
+										<% } %>
+
+									
+
+								
+								
 
 
 								
