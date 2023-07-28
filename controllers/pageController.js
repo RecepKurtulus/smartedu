@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 const User = require('../models/User');
 const Courses = require('../models/Course');
 exports.getIndexPage= async (req, res) =>{
-    const indexCourses=await Courses.find().limit(10);
+    const indexCourses=await Courses.find().limit(2);
     indexCourses.reverse();
     const totalTeachers=await User.countDocuments({role:"Teacher"});
     const totalStudents=await User.countDocuments({role:"Student"});

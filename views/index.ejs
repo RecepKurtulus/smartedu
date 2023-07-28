@@ -59,7 +59,7 @@
             <div class="row align-items-center">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                     <div class="message-box">
-                        <% if(courses[0]){ %>
+                        <% if(indexCourses[0]){ %>
 							<h2><%= indexCourses[0].name %></h2>
                         <p><%= indexCourses[0].description %></p>
 						<a href="/courses/<%= indexCourses[0].slug %>" class="hover-btn-new orange"><span>Learn More</span></a>
@@ -74,7 +74,7 @@
 			</div>
 						<% } %>
                         
-						<% if(courses[1]){ %>
+						<% if(indexCourses[1]){ %>
 							<div class="row align-items-center">
 								<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
 									<div class="post-media wow fadeIn">
