@@ -11,6 +11,9 @@
     "portal",
     "nodejs"
   ],
+  "engines": {
+    "node": ">=14 <15"
+  },
   "author": "Recep Bozkurt Kurtulus",
   "license": "ISC",
   "dependencies": {
