@@ -3909,6 +3909,24 @@ a.link-style3 {
     z-index: 10000;
     display: none; 
 }
+.iframe-wrapper{
+    position: relative;
+    padding-top: 56.25%;
+}
+
+.iframe{
+position: absolute;
+width: 100%;
+height: 100%;
+left: 0;
+top: 0;
+}
+
+.containerf{
+    max-width: 100%;
+    width:1280px;
+}
+
 .btn-rounded{
     border-radius: 100%;
 }
