@@ -51,7 +51,7 @@ exports.sendEmail= async (req, res) =>{
       });
       
       // async..await is not allowed in global scope, must use a wrapper
-      async function main() {
+      
         // send mail with defined transport object
         const info = await transporter.sendMail({
           from: '"Smartedu Contact Form" <phoibosq@gmail.com>', // sender address
@@ -64,11 +64,12 @@ exports.sendEmail= async (req, res) =>{
         req.flash('success',"We received your message successfully");
         
         res.status(201).redirect('/contact');
-}
+
 
   }
   catch(error){
-    req.flash(error, `Something happened!`);
+    req.flash("error", `${error}`);
+    console.log(error);
     
   }
     
